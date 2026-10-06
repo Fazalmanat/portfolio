@@ -16,10 +16,5 @@ export const experienceItems = [
     tag: 'University Project',
     title: 'GramaSathi — AI Village Secretary (Capstone)',
     description: 'Add the brief and the outcome — grade, publication, or demo.'
-  },
-  {
-    tag: 'Leadership',
-    title: '[Club / Society Role]',
-    description: 'Add what you organized or led, and its impact.'
   }
 ];

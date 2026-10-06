@@ -4,7 +4,7 @@ export default function MovingMarquee({ items, reverse = false, speed = '25s' })
   const defaultItems = [
     'UNITY 3D & VR',
     'FULL-STACK ARCHITECTURE',
-    'C# & .NET',
+    'C# ',
     'PYTHON AUTOMATION',
     'AI AGENTIC WORKFLOWS',
     'INTERACTIVE EXPERIENCES',

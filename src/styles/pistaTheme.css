@@ -1,0 +1,708 @@
+/* Clean Pista & Sage Matte Design System - High Contrast & No Dark Grid */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-heading: 'Outfit', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Matte Clean Pista Light Palette */
+  --bg-page: #F4F7F4;
+  --bg-card: #FFFFFF;
+  --bg-card-alt: #EBF3ED;
+  --bg-subtle: #E2EFE5;
+
+  --pista-dark: #12261A;
+  --pista-main: #2E6B42;
+  --pista-soft: #6BA87E;
+  --pista-tint: #D6EBDC;
+
+  --text-main: #12261A;
+  --text-muted: #3D5445;
+  --text-dim: #607868;
+
+  --border-light: #CFE2D3;
+  --border-strong: #96C4A0;
+
+  --radius-full: 9999px;
+  --radius-xl: 24px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+
+  --shadow-flat: 0 4px 16px rgba(18, 38, 26, 0.05);
+  --shadow-card: 0 8px 24px rgba(18, 38, 26, 0.08);
+
+  --transition-fast: all 0.25s ease-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: #F4F7F4 !important;
+  color: #12261A !important;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pista-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Clear, High-Contrast Section Headers */
+.section-header-simple {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-header-simple h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 800;
+  color: #12261A !important;
+  letter-spacing: -0.5px;
+}
+
+/* ---------------------------------------------------- */
+/* 1. HERO SECTION - CENTERED & STRAIGHT FULL NAME */
+/* ---------------------------------------------------- */
+.hero-clean-section {
+  padding: 100px 0 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-full-name {
+  font-family: var(--font-heading);
+  font-size: clamp(34px, 5.5vw, 60px);
+  font-weight: 800;
+  color: #12261A !important;
+  white-space: nowrap; /* Full name in a straight line */
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+}
+
+.hero-role-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2E6B42 !important;
+  margin-bottom: 16px;
+}
+
+.hero-bio-lede {
+  font-size: 17px;
+  color: #3D5445 !important;
+  max-width: 660px;
+  margin: 0 auto 32px;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-pista-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  background: #12261A;
+  color: #ffffff !important;
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(18, 38, 26, 0.15);
+  transition: var(--transition-fast);
+}
+
+.btn-pista-primary:hover {
+  background: #2E6B42;
+  transform: translateY(-2px);
+}
+
+.btn-pista-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  border: 1.5px solid #96C4A0;
+  color: #12261A !important;
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.btn-pista-outline:hover {
+  background: #EBF3ED;
+  border-color: #2E6B42;
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------- */
+/* 2. CIRCULAR HUD NAVBAR (3 LINES BUTTON) */
+/* ---------------------------------------------------- */
+.hud-navbar-fixed {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 1000;
+}
+
+.hud-trigger-lines {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #12261A;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-fast);
+}
+
+.hud-trigger-lines span {
+  display: block;
+  width: 20px;
+  height: 2.5px;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+.hud-trigger-lines:hover {
+  background: #2E6B42;
+  transform: scale(1.05);
+}
+
+.hud-menu-circular {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  width: 260px;
+  background: #ffffff;
+  border: 1.5px solid #96C4A0;
+  border-radius: 24px;
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hud-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: var(--radius-lg);
+  background: #F4F7F4;
+  border: 1px solid #CFE2D3;
+  color: #12261A !important;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+
+}
+
+.hud-menu-btn:hover {
+  background: #D6EBDC;
+}
+
+/* ---------------------------------------------------- */
+/* 3. BIOGRAPHY - SIMPLE GAME CARDS (HIGH CONTRAST) */
+/* ---------------------------------------------------- */
+.bio-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.bio-card-simple {
+  background: #ffffff;
+  border: 1.5px solid #96C4A0;
+  border-radius: var(--radius-xl);
+  padding: 26px;
+  box-shadow: var(--shadow-flat);
+  transition: var(--transition-fast);
+}
+
+.bio-card-simple:hover {
+  border-color: #2E6B42;
+  box-shadow: var(--shadow-card);
+}
+
+.bio-card-title {
+  font-family: var(--font-heading);
+  font-size: 21px;
+  font-weight: 800;
+  color: #12261A !important;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #D6EBDC;
+}
+
+.bio-simple-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bio-simple-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  color: #3D5445 !important;
+}
+
+.bio-simple-list li::before {
+  content: '•';
+  color: #2E6B42;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ---------------------------------------------------- */
+/* 4. SKILLS - SEMICONDUCTOR CIRCUIT BOARD LAYOUT */
+/* ---------------------------------------------------- */
+.circuit-board {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0 20px 50px;
+}
+
+/* Central vertical bus trace */
+.circuit-bus {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 50px;
+  width: 3px;
+  background: linear-gradient(180deg, #96C4A0 0%, #2E6B42 50%, #96C4A0 100%);
+  border-radius: 3px;
+}
+
+/* Each skill row connects horizontally from the bus */
+.circuit-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+/* Connection node dot on the bus */
+.circuit-node-dot {
+  position: absolute;
+  left: -4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #2E6B42;
+  border: 2px solid #ffffff;
+  z-index: 2;
+}
+
+/* Horizontal trace from bus to chip */
+.circuit-trace {
+  width: 40px;
+  height: 2px;
+  background: #96C4A0;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+/* IC Chip container */
+.circuit-chip {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+
+/* Chip connector pins on left edge */
+.chip-pin-left,
+.chip-pin-right {
+  width: 6px;
+  background: repeating-linear-gradient(
+    180deg,
+    #96C4A0 0px, #96C4A0 4px,
+    transparent 4px, transparent 10px
+  );
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Main chip body */
+.chip-body {
+  flex: 1;
+  background: #ffffff;
+  border: 1.5px solid #96C4A0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 14px rgba(18, 38, 26, 0.05);
+  transition: all 0.25s ease-out;
+}
+
+.chip-body:hover {
+  border-color: #2E6B42;
+  box-shadow: 0 6px 20px rgba(18, 38, 26, 0.1);
+}
+
+.chip-label {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 15px;
+  color: #12261A;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed #CFE2D3;
+  letter-spacing: 0.3px;
+}
+
+.chip-pins-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-pin-skill {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: #EBF3ED;
+  border: 1px solid #CFE2D3;
+  color: #12261A;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Keep old .skill-chip-plain for project modal tags */
+.skill-chip-plain {
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: #EBF3ED;
+  border: 1px solid #CFE2D3;
+  color: #12261A !important;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------- */
+/* 5. EXPERIENCE - ZIGZAG TIMELINE */
+/* ---------------------------------------------------- */
+.zigzag-experience-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.zigzag-svg-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.zigzag-item-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 5;
+}
+
+.zigzag-item-row.left {
+  justify-content: flex-start;
+  padding-right: 52%;
+}
+
+.zigzag-item-row.right {
+  justify-content: flex-end;
+  padding-left: 52%;
+}
+
+.zigzag-exp-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid #96C4A0;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-flat);
+  transition: var(--transition-fast);
+}
+
+.zigzag-exp-card:hover {
+  box-shadow: var(--shadow-card);
+  border-color: #2E6B42;
+}
+
+.exp-tag-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.exp-tag {
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  background: #D6EBDC;
+  color: #12261A !important;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.exp-date {
+  font-size: 12.5px;
+  color: #607868 !important;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.exp-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  color: #12261A !important;
+  margin-bottom: 6px;
+}
+
+.exp-desc {
+  font-size: 14.5px;
+  color: #3D5445 !important;
+}
+
+/* ---------------------------------------------------- */
+/* 6. PROJECTS - INTERLOCKING BEEHIVE GRID */
+/* ---------------------------------------------------- */
+.beehive-grid-interlocking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.beehive-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: -30px;
+}
+
+.beehive-row:first-child {
+  margin-top: 0;
+}
+
+.hex-cell {
+  position: relative;
+  width: 220px;
+  height: 250px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.hex-cell.big-cell {
+  width: 250px;
+  height: 285px;
+  background: #EBF3ED;
+}
+
+.hex-cell:hover {
+  background: #12261A;
+  transform: scale(1.06);
+}
+
+.hex-cell:hover h3,
+.hex-cell:hover p,
+.hex-cell:hover span {
+  color: #ffffff !important;
+}
+
+.hex-cell h3 {
+  font-family: var(--font-heading);
+  font-size: 17.5px;
+  font-weight: 800;
+  color: #12261A !important;
+}
+
+.hex-cell p {
+  font-size: 12.5px;
+  color: #3D5445 !important;
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------- */
+/* PROJECT MODAL ANIMATION */
+/* ---------------------------------------------------- */
+.project-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(18, 38, 26, 0.45);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.project-modal-backdrop.opening {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.project-modal-backdrop.closing {
+  animation: fadeOut 0.25s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.project-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border: 1.5px solid #96C4A0;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 20px 50px rgba(18, 38, 26, 0.12);
+}
+
+.project-modal-card.opening {
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.project-modal-card.closing {
+  animation: slideDown 0.25s ease-in forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(60px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideDown {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(40px) scale(0.96); }
+}
+
+.project-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #F4F7F4;
+  border: 1px solid #CFE2D3;
+  font-size: 16px;
+  cursor: pointer;
+  color: #12261A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.project-modal-close:hover {
+  background: #D6EBDC;
+}
+
+.project-modal-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: #12261A;
+  margin-bottom: 8px;
+}
+
+.project-modal-desc {
+  color: #3D5445;
+  font-size: 14.5px;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------- */
+/* FOOTER */
+/* ---------------------------------------------------- */
+.footer-simple {
+  text-align: center;
+  padding: 40px 0;
+  color: #607868 !important;
+  font-size: 14px;
+  border-top: 1px solid #CFE2D3;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .hero-full-name {
+    font-size: 28px;
+    white-space: normal;
+  }
+  .circuit-board {
+    padding-left: 30px;
+  }
+  .circuit-bus {
+    left: 30px;
+  }
+  .zigzag-item-row.left,
+  .zigzag-item-row.right {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .beehive-row {
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+}
+

@@ -1,50 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import '../styles/extras.css';
+
+const cards = [
+  { title: 'Who I Am', items: ['CS & Design Graduate', 'Full-stack & interactive experiences', 'Clean logic, maintainable code'] },
+  { title: 'What I Build', items: ['Web Apps (React, Node, Flask)', 'VR Simulations (Unity, C#)', 'AI Voice Automation'] },
+  { title: 'Learning Now', items: ['Advanced Python & DSA', 'Docker & Cloud CI/CD', 'System Design'] }
+];
 
 export default function PistaAbout() {
-  const bioCards = [
-    {
-      title: 'Who I Am',
-      items: [
-        'CS & Design Graduate',
-        'Full-stack & interactive experiences',
-        'Clean logic, maintainable code'
-      ]
-    },
-    {
-      title: 'What I Build',
-      items: [
-        'Web Apps (React, Node, Flask)',
-        'VR Simulations (Unity, C#)',
-        'AI Voice Automation'
-      ]
-    },
-    {
-      title: 'Learning Now',
-      items: [
-        'Advanced Python & DSA',
-        'Docker & Cloud CI/CD',
-        'System Design'
-      ]
-    }
-  ];
+  const ref = useRef(null);
+  const [spread, setSpread] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !('IntersectionObserver' in window)) { setSpread(true); return; }
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setSpread(true); io.disconnect(); }
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <section id="about" style={{ padding: '60px 0' }}>
+    <section id="about" style={{ padding: '80px 0 40px' }}>
       <div className="pista-container">
-        <div className="section-header-simple">
-          <h2>About Me</h2>
-        </div>
-
-        <div className="bio-cards-grid">
-          {bioCards.map((card, idx) => (
-            <div key={idx} className="bio-card-simple">
-              <h3 className="bio-card-title">{card.title}</h3>
-              <ul className="bio-simple-list">
-                {card.items.map((item, itemIdx) => (
-                  <li key={itemIdx}>{item}</li>
-                ))}
-              </ul>
-            </div>
+        <h2 className="sr-only">About me</h2>
+        <div ref={ref} className={`about-deck ${spread ? 'spread' : ''}`}>
+          {cards.map((c, i) => (
+            <article key={c.title} className="about-card-play" style={{ '--i': i }}>
+              <h3>{c.title}</h3>
+              <ul>{c.items.map((t) => <li key={t}>{t}</li>)}</ul>
+            </article>
           ))}
         </div>
       </div>

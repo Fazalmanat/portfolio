@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/pistaTheme.css';
 
 import CircularHudNavbar from './components/CircularHudNavbar';
@@ -7,40 +7,36 @@ import PistaAbout from './components/PistaAbout';
 import PistaSkills from './components/PistaSkills';
 import PistaExperience from './components/PistaExperience';
 import PistaProjects from './components/PistaProjects';
-import PistaStats from './components/PistaStats';
+import PistaCertifications from './components/PistaCertifications';
 import PistaContact from './components/PistaContact';
+import Reveal from './components/Reveal';
 
 export default function App() {
+  const [awake, setAwake] = useState(false);
+
+  // Page stays on the landing screen until the cord is pulled.
+  useEffect(() => {
+    document.body.style.overflow = awake ? '' : 'hidden';
+    if (!awake) window.scrollTo(0, 0);
+  }, [awake]);
+
+  const hidden = { visibility: awake ? 'visible' : 'hidden' };
+
   return (
     <>
-      {/* 3-Lines Circular HUD Navbar */}
-      <CircularHudNavbar />
-
+      {awake && <CircularHudNavbar />}
       <main>
-        {/* 1. Hero: Centered Intro + Straight Full Name */}
-        <PistaHero />
-
-        {/* 2. Biography: Clean Game Cards (No Extra Tier Data) */}
-        <PistaAbout />
-
-        {/* 3. Skills: Right-Directed Circuit Tree Branches */}
-        <PistaSkills />
-
-        {/* 4. Experience: True Zigzag Timeline with Zigzag Connecting Line */}
-        <PistaExperience />
-
-        {/* 5. Projects: Interlocking Honeycomb Beehive Grid */}
-        <PistaProjects />
-
-        {/* 6. Metrics & Stats */}
-        <PistaStats />
-
-        {/* 7. Contact: Simple Clean Form */}
-        <PistaContact />
+        <PistaHero onAwake={() => setAwake(true)} />
+        <div style={hidden}>
+          <PistaAbout />
+          <Reveal><PistaProjects /></Reveal>
+          <Reveal><PistaSkills /></Reveal>
+          <Reveal><PistaExperience /></Reveal>
+          <Reveal><PistaCertifications /></Reveal>
+          <Reveal><PistaContact /></Reveal>
+        </div>
       </main>
-
-      {/* Clean Footer */}
-      <footer className="footer-simple">
+      <footer className="footer-simple" style={hidden}>
         <div className="pista-container">
           <p>© {new Date().getFullYear()} Fazal Rahman Manat • All rights reserved.</p>
         </div>

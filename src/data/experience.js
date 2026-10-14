@@ -11,10 +11,5 @@ export const experienceItems = [
     title: 'Endora 2.0 Techno AI-Odyssey — 2nd Place 🥈',
     description: 'Secured 2nd position in the Game Development Competition held at Government Engineering College, Kozhikode. Recognised for creativity, problem-solving, and technical expertise in game development.',
     cert: null
-  },
-  {
-    tag: 'University Project',
-    title: 'GramaSathi — AI Village Secretary (Capstone)',
-    description: 'Add the brief and the outcome — grade, publication, or demo.'
   }
 ];

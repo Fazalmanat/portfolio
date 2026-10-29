@@ -11,14 +11,18 @@ export default function PistaAbout() {
   const ref = useRef(null);
   const [spread, setSpread] = useState(false);
 
+  // Spread shortly after the deck is mostly on screen, or immediately if it was scrolled past.
   useEffect(() => {
     const el = ref.current;
-    if (!el || !('IntersectionObserver' in window)) { setSpread(true); return; }
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setSpread(true); io.disconnect(); }
-    }, { threshold: 0.3 });
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setSpread(true); return; }
+    let timer;
+    const go = (ms) => { if (!timer) timer = setTimeout(() => setSpread(true), ms); };
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) go(400); }, { threshold: 0.3 });
     io.observe(el);
-    return () => io.disconnect();
+    const onScroll = () => { if (el.getBoundingClientRect().bottom < 0) go(0); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { io.disconnect(); clearTimeout(timer); window.removeEventListener('scroll', onScroll); };
   }, []);
 
   return (

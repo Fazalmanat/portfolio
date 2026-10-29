@@ -9,14 +9,18 @@ import PistaExperience from './components/PistaExperience';
 import PistaProjects from './components/PistaProjects';
 import PistaCertifications from './components/PistaCertifications';
 import PistaContact from './components/PistaContact';
+import PistaActivity from './components/PistaActivity';
 import Reveal from './components/Reveal';
+import HoneycombBackground from './components/HoneycombBackground';
 
 export default function App() {
   const [awake, setAwake] = useState(false);
 
   // Page stays on the landing screen until the cord is pulled.
   useEffect(() => {
-    document.body.style.overflow = awake ? '' : 'hidden';
+    const v = awake ? '' : 'hidden';
+    document.documentElement.style.overflow = v;
+    document.body.style.overflow = v;
     if (!awake) window.scrollTo(0, 0);
   }, [awake]);
 
@@ -24,6 +28,7 @@ export default function App() {
 
   return (
     <>
+      <HoneycombBackground />
       {awake && <CircularHudNavbar />}
       <main>
         <PistaHero onAwake={() => setAwake(true)} />
@@ -33,6 +38,7 @@ export default function App() {
           <Reveal><PistaSkills /></Reveal>
           <Reveal><PistaExperience /></Reveal>
           <Reveal><PistaCertifications /></Reveal>
+          <Reveal><PistaActivity /></Reveal>
           <Reveal><PistaContact /></Reveal>
         </div>
       </main>

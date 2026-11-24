@@ -1,15 +1,15 @@
 export const skillCategories = [
   {
     category: 'Languages',
-    skills: ['Python', 'JavaScript', 'C#', 'HTML', 'CSS', 'SQL']
+    skills: ['Python', 'JavaScript', 'C#', 'HTML', 'CSS', 'SQL','C']
   },
   {
     category: 'Frameworks',
-    skills: ['Node.js', 'Express', 'React', 'Flask']
+    skills: ['Node.js', 'Express', 'React', 'Flask', 'Django']
   },
   {
     category: 'Databases',
-    skills: ['Firebase', 'Firestore', 'MySQL']
+    skills: ['Firebase', 'Firestore', 'MySQL','Supabase']
   },
   {
     category: 'Tools',
@@ -17,6 +17,6 @@ export const skillCategories = [
   },
   {
     category: 'Other',
-    skills: ['REST APIs', 'Responsive Design', 'OOP', 'Problem Solving']
+    skills: ['REST APIs', 'OOP', 'Problem Solving']
   }
 ];

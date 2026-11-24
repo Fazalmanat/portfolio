@@ -8,6 +8,20 @@ const apo = (R) => (R * Math.sqrt(3)) / 2;
 const dist = (a, b) => apo(a) + apo(b) + GAP;
 const step = (c, k, d) => ({ x: c.x + d * Math.cos((k * Math.PI) / 3), y: c.y + d * Math.sin((k * Math.PI) / 3) });
 
+const rad = (d) => (d * Math.PI) / 180;
+const poly = (c, R) => Array.from({ length: 6 }, (_, i) => [c.x + R * Math.cos(rad(-90 + 60 * i)), c.y + R * Math.sin(rad(-90 + 60 * i))]);
+function overlap(A, B) {
+  for (const P of [A, B]) {
+    for (let i = 0; i < 6; i++) {
+      const [x1, y1] = P[i], [x2, y2] = P[(i + 1) % 6];
+      const nx = y1 - y2, ny = x2 - x1;
+      const pa = A.map(([x, y]) => nx * x + ny * y), pb = B.map(([x, y]) => nx * x + ny * y);
+      if (Math.max(...pa) < Math.min(...pb) || Math.max(...pb) < Math.min(...pa)) return false;
+    }
+  }
+  return true;
+}
+
 function buildLayout(big, small) {
   const d = dist(R_B, R_S);
   const f0 = { x: 0, y: 0 };
@@ -17,6 +31,21 @@ function buildLayout(big, small) {
   const s2 = step(f0, 2, d);
   const s3 = step(f0, 1, d);
   const slots = [[big[0], R_B, f0], [small[0], R_S, s0], [big[1], R_B, f1], [small[1], R_S, s1], [small[2], R_S, s2], [small[3], R_S, s3]].filter(([p]) => p);
+  // Any projects beyond the six hand-placed slots are added next to the cluster, never overlapping.
+  [...big.slice(2).map((p) => [p, R_B]), ...small.slice(4).map((p) => [p, R_S])].forEach(([p, R]) => {
+    const mx = slots.reduce((a, s) => a + s[2].x, 0) / slots.length;
+    const my = slots.reduce((a, s) => a + s[2].y, 0) / slots.length;
+    let best = null;
+    slots.forEach(([, R2, c2]) => {
+      for (let k = 0; k < 6; k++) {
+        const c = step(c2, k, apo(R2) + apo(R) + GAP);
+        if (slots.some(([, R3, c3]) => overlap(poly(c, R), poly(c3, R3)))) continue;
+        const d = Math.hypot(c.x - mx, c.y - my);
+        if (!best || d < best.d) best = { c, d };
+      }
+    });
+    if (best) slots.push([p, R, best.c]);
+  });
   const minX = Math.min(...slots.map(([, R, c]) => c.x - apo(R)));
   const maxX = Math.max(...slots.map(([, R, c]) => c.x + apo(R)));
   const minY = Math.min(...slots.map(([, R, c]) => c.y - R));
@@ -77,7 +106,7 @@ export default function PistaProjects() {
         <div className="hex-field-wrap" ref={wrapRef} style={{ height: layout.h * scale }}>
           <div className="hex-field" style={{ width: layout.w, height: layout.h, transform: `scale(${scale})`, left: `calc(50% - ${(layout.w * scale) / 2}px)` }}>
             {layout.items.map(({ p, big, left, top, w, h }) => (
-              <div className="hex-wrap" key={p.id} style={{ left, top, width: w, height: h }}>
+              <div className="hex-wrap" key={p.id || p.title} style={{ left, top, width: w, height: h }}>
                 <button
                   type="button"
                   className={`hex-cell ${big ? 'big-cell' : ''} ${heroImg(p) ? 'has-media' : ''}`}

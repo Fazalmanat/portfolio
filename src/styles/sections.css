@@ -1,0 +1,149 @@
+/* ---- Experience: hexagon window + mini hexagons ---- */
+.xp-stage { position: relative; display: flex; justify-content: center; max-width: 1000px; margin: 0 auto; }
+.xp-window { --xpclip: polygon(50% 0, 100% 18%, 100% 82%, 50% 100%, 0 82%, 0 18%); position: relative; width: min(92vw, 720px); aspect-ratio: 1.2 / 1; filter: drop-shadow(0 12px 22px rgba(18, 38, 26, 0.2)); }
+.xp-edge { position: absolute; inset: 0; background: #96C4A0; clip-path: var(--xpclip); }
+.xp-face { position: absolute; inset: 3px; background: #fff; clip-path: var(--xpclip); }
+.xp-scroll { position: absolute; inset: 0; overflow-y: auto; scrollbar-width: none; outline: none; }
+.xp-scroll::-webkit-scrollbar { display: none; }
+.xp-content { position: relative; padding-left: 9%; padding-right: 9%; }
+.xp-line { position: absolute; left: 0; top: 0; pointer-events: none; }
+.xp-line polyline { fill: none; stroke: #96C4A0; stroke-width: 3; stroke-dasharray: 8 6; stroke-linecap: round; }
+.xp-line circle { fill: #fff; stroke: #2E6B42; stroke-width: 3; transition: r 0.25s; }
+.xp-row { display: flex; margin-bottom: 46px; }
+.xp-row.right { justify-content: flex-end; }
+.xp-card { position: relative; z-index: 1; width: 45%; background: #fff; border: 1.5px solid #96C4A0; border-radius: 16px; padding: 14px 16px; opacity: 0.5; transform: scale(0.95); transition: opacity 0.3s, transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+.xp-card.on { opacity: 1; transform: none; border-color: #2E6B42; box-shadow: var(--shadow-card); }
+.xp-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.xp-title { font: 800 15px/1.3 var(--font-heading); color: #12261A; margin-bottom: 6px; }
+.xp-desc { font-size: 13px; line-height: 1.55; color: #3D5445; }
+.xp-hint { text-align: center; font: 500 12px var(--font-mono); color: #607868; margin-top: 14px; }
+.xp-mini-wrap { position: absolute; width: 170px; height: 196px; filter: drop-shadow(0 6px 10px rgba(18, 38, 26, 0.16)); }
+.xp-mini-wrap.prev { top: 4%; right: calc(50% + min(46vw, 360px) + 6px); }
+.xp-mini-wrap.next { bottom: 4%; left: calc(50% + min(46vw, 360px) + 6px); }
+.xp-mini { width: 100%; height: 100%; border: 0; cursor: pointer; background: #EBF3ED; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 26% 16%; font: inherit; text-align: center; transition: background 0.25s; }
+.xp-mini .d { font: 600 10.5px var(--font-mono); color: #2E6B42; }
+.xp-mini .t { font: 700 12px/1.25 var(--font-heading); color: #12261A; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.xp-mini:disabled { opacity: 0.4; cursor: default; }
+.xp-mini:hover:not(:disabled), .xp-mini:focus-visible:not(:disabled) { background: #12261A; outline: none; }
+.xp-mini:hover:not(:disabled) .d, .xp-mini:hover:not(:disabled) .t, .xp-mini:focus-visible:not(:disabled) .d, .xp-mini:focus-visible:not(:disabled) .t { color: #fff; }
+@media (max-width: 1180px) { .xp-mini-wrap { display: none; } }
+@media (max-width: 700px) { .xp-window { aspect-ratio: 0.95 / 1; } .xp-card { width: 64%; } }
+
+/* ---- Achievements: hologram + spinning hexagon coins ---- */
+.holo { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-height: 130px; }
+.holo-panel { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 24px; border: 1px dashed rgba(46, 107, 66, 0.55); border-radius: 10px; background: rgba(46, 107, 66, 0.07); color: #12261A; text-shadow: 0 0 10px rgba(46, 107, 66, 0.35); animation: holoIn 0.9s ease both; text-align: center; }
+.holo-panel::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(46, 107, 66, 0.09) 0 1px, transparent 1px 4px); animation: holoScan 3s linear infinite; }
+.holo-tag { font: 600 11px var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; color: #2E6B42; }
+.holo-panel strong { font: 800 19px var(--font-heading); }
+.holo-sub { font: 500 13px var(--font-mono); color: #3D5445; }
+.holo-beam { width: 130px; height: 44px; background: linear-gradient(to top, rgba(46, 107, 66, 0.32), rgba(46, 107, 66, 0)); clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%); animation: holoBeam 2.6s ease-in-out infinite; }
+@keyframes holoIn { 0% { opacity: 0; transform: translateY(8px); } 15% { opacity: 0.9; } 22% { opacity: 0.2; } 32% { opacity: 1; } 42% { opacity: 0.5; } 100% { opacity: 1; transform: none; } }
+@keyframes holoScan { to { background-position: 0 4px; } }
+@keyframes holoBeam { 50% { opacity: 0.5; } }
+.coin-viewport { position: relative; height: 122px; overflow: hidden; perspective: 700px; }
+.coin-track { position: relative; left: 50%; display: flex; gap: 30px; padding-top: 10px; transition: transform 0.7s cubic-bezier(0.3, 0.8, 0.3, 1); }
+.coin { position: relative; flex: 0 0 88px; height: 102px; padding: 0; border: 0; background: none; cursor: pointer; opacity: 0.5; transition: opacity 0.4s, filter 0.4s; }
+.coin.on { opacity: 1; filter: drop-shadow(0 0 10px rgba(46, 107, 66, 0.5)); }
+.coin-spin { position: absolute; inset: 0; display: block; transform-style: preserve-3d; animation: coinSpin 5.5s linear infinite; animation-delay: calc(var(--i) * -1.3s); }
+.coin-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); backface-visibility: hidden; font: 800 24px var(--font-heading); color: #12261A; }
+.coin-face.back { transform: rotateY(180deg); }
+.coin.gold .coin-face { background: linear-gradient(135deg, #F6D874, #D9A92B); }
+.coin.silver .coin-face { background: linear-gradient(135deg, #EEF2F0, #A9B5AF); }
+.coin.bronze .coin-face { background: linear-gradient(135deg, #E8B98A, #B87333); }
+@keyframes coinSpin { to { transform: rotateY(360deg); } }
+
+/* ---- Certifications: compact circles ---- */
+.cert-circles { gap: 22px 16px; }
+.cert-item { width: 116px; }
+.cert-circle { width: 72px; height: 72px; font-size: 20px; }
+.cert-name { font-size: 13px; }
+
+/* ---- Experience: plain rectangular window on the site background ---- */
+.xp-window { width: min(92vw, 720px); height: 520px; aspect-ratio: auto; filter: none; }
+.xp-edge { background: none; border: 1.5px solid #96C4A0; border-radius: 20px; clip-path: none; }
+.xp-face { inset: 0; background: transparent; clip-path: none; border-radius: 20px; overflow: hidden; }
+.xp-scroll { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%); }
+@media (max-width: 700px) { .xp-window { height: 480px; aspect-ratio: auto; } }
+
+/* ---- Achievements: coin ring that rolls on scroll ---- */
+.ring-stage { position: relative; height: 150px; perspective: 900px; perspective-origin: 50% 35%; }
+.ring { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; transition: transform 0.35s ease-out; }
+.ring-coin { position: absolute; left: -44px; top: -51px; width: 88px; height: 102px; padding: 0; border: 0; background: none; cursor: pointer; transform-style: preserve-3d; }
+.ring-coin .coin-face { transition: opacity 0.3s; }
+.ring-coin:not(.on) .coin-face.front { opacity: 0.6; }
+.ring-coin .coin-face.back { background: #D6EBDC; }
+.ring-coin.gold .coin-face.front { background: linear-gradient(135deg, #F6D874, #D9A92B); }
+.ring-coin.silver .coin-face.front { background: linear-gradient(135deg, #EEF2F0, #A9B5AF); }
+.ring-coin.bronze .coin-face.front { background: linear-gradient(135deg, #E8B98A, #B87333); }
+
+/* ---- Heartbeat divider between sections (repeating) ---- */
+.hb { display: flex; align-items: center; max-width: 1100px; margin: 22px auto; padding: 0 24px; }
+.hb-line { flex: 1; height: 2px; transform: scaleX(0); transform-origin: left; transition: transform 0.6s linear; }
+.hb-line.l { background: linear-gradient(90deg, transparent, #7FB991); }
+.hb-line.r { background: linear-gradient(90deg, #7FB991, transparent); }
+.hb-beat { flex: 0 0 auto; overflow: visible; }
+.hb-beat path { fill: none; stroke: #2E6B42; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.9s ease-in-out 0.6s; filter: drop-shadow(0 0 3px rgba(46, 107, 66, 0.5)); }
+
+/* One 4.2s cycle: left line 0-0.6s, beat 0.6-1.5s, right line 1.5-2.1s, hold, fade, repeat */
+.hb.in { animation: hb-fade 4.2s linear infinite; }
+.hb.in .hb-line.l    { animation: hb-line-l 4.2s linear infinite; }
+.hb.in .hb-beat path { animation: hb-draw   4.2s ease-in-out infinite; }
+.hb.in .hb-line.r    { animation: hb-line-r 4.2s linear infinite; }
+
+@keyframes hb-line-l {
+  0%      { transform: scaleX(0); }
+  14.3%   { transform: scaleX(1); }
+  100%    { transform: scaleX(1); }
+}
+@keyframes hb-draw {
+  0%, 14.3% { stroke-dashoffset: 1; }
+  35.7%     { stroke-dashoffset: 0; }
+  100%      { stroke-dashoffset: 0; }
+}
+@keyframes hb-line-r {
+  0%, 35.7% { transform: scaleX(0); }
+  50%       { transform: scaleX(1); }
+  100%      { transform: scaleX(1); }
+}
+@keyframes hb-fade {
+  0%, 88% { opacity: 1; }
+  100%    { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hb.in, .hb.in .hb-line, .hb.in .hb-beat path { animation: none; }
+  .hb.in .hb-line { transform: scaleX(1); }
+  .hb.in .hb-beat path { stroke-dashoffset: 0; }
+}
+@media (max-width: 560px) { .hb-beat { width: 150px; } }
+
+/* ---- Navbar: compact shortcuts under the menu button ---- */
+.hud-mini { position: absolute; top: 64px; right: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.hud-mini-btn { padding: 6px 14px; border-radius: 9999px; border: 1px solid #96C4A0; background: rgba(255, 255, 255, 0.92); color: #3D5445; font: 700 12.5px var(--font-heading); cursor: pointer; box-shadow: 0 2px 8px rgba(18, 38, 26, 0.08); animation: miniIn 0.3s ease both; transition: background 0.25s, color 0.25s; }
+.hud-mini-btn.on { background: #12261A; color: #fff; border-color: #12261A; }
+.hud-mini-btn:not(.on):hover { background: #D6EBDC; }
+@keyframes miniIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+
+/* ---- Education: timeline with hexagon badges ---- */
+.edu-list { list-style: none; padding: 0; position: relative; max-width: 720px; margin: 0 auto; }
+.edu-item:not(:last-child)::before { content: ''; position: absolute; left: 33px; top: 39px; height: calc(100% + 26px); border-left: 3px dashed #96C4A0; }
+.edu-item { position: relative; display: flex; align-items: flex-start; gap: 22px; margin-bottom: 26px; }
+.edu-item:last-child { margin-bottom: 0; }
+.edu-badge { position: relative; z-index: 1; flex: 0 0 68px; height: 78px; display: flex; align-items: center; justify-content: center; background: #2E6B42; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); transition: background 0.25s; }
+.edu-badge span { display: flex; align-items: center; justify-content: center; width: calc(100% - 6px); height: calc(100% - 6px); background: #fff; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); font: 800 17px var(--font-heading); color: #12261A; transition: background 0.25s, color 0.25s; }
+.edu-item:hover .edu-badge span { background: #12261A; color: #fff; }
+.edu-card { flex: 1; min-width: 0; background: #fff; border: 1.5px solid #96C4A0; border-radius: 16px; padding: 16px 20px; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; }
+.edu-item:hover .edu-card { transform: translateY(-3px); border-color: #2E6B42; box-shadow: var(--shadow-card); }
+.edu-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.edu-period { font: 600 12px var(--font-mono); color: #2E6B42; }
+.edu-grade { font: 600 11.5px var(--font-mono); color: #12261A; background: #D6EBDC; border-radius: 9999px; padding: 3px 10px; }
+.edu-degree { font: 800 17px/1.3 var(--font-heading); color: #12261A; margin-bottom: 3px; }
+.edu-school { font-size: 14px; font-weight: 600; color: #3D5445; }
+.edu-desc { font-size: 13px; line-height: 1.55; color: #607868; margin-top: 8px; }
+@media (max-width: 560px) {
+  .edu-item:not(:last-child)::before { left: 25px; top: 30px; }
+  .edu-item { gap: 14px; }
+  .edu-badge { flex-basis: 52px; height: 60px; }
+  .edu-badge span { font-size: 14px; }
+  .edu-card { padding: 14px 16px; }
+}

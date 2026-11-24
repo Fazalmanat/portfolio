@@ -26,9 +26,9 @@ export default function PistaAbout() {
   }, []);
 
   return (
-    <section id="about" style={{ padding: '80px 0 40px' }}>
+    <section id="about" style={{ padding: '48px 0 40px' }}>
       <div className="pista-container">
-        <h2 className="sr-only">About me</h2>
+        <div className="section-header-simple"><h2>About Me</h2></div>
         <div ref={ref} className={`about-deck ${spread ? 'spread' : ''}`}>
           {cards.map((c, i) => (
             <article key={c.title} className="about-card-play" style={{ '--i': i }}>

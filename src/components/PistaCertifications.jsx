@@ -1,6 +1,7 @@
 import React from 'react';
-import { certifications } from '../data/miscData';
+import { certifications } from '../data/credentials';
 import '../styles/extras.css';
+import '../styles/sections.css';
 
 export default function PistaCertifications() {
   return (
@@ -16,11 +17,12 @@ export default function PistaCertifications() {
                 <span className="cert-issuer">{c.issuer}</span>
               </>
             );
+            const tip = [c.date, c.cert && `ID ${c.cert}`].filter(Boolean).join(' · ') || c.name;
             return (
               <li key={c.name}>
                 {c.url
-                  ? <a className="cert-item" href={c.url} target="_blank" rel="noopener noreferrer">{inner}</a>
-                  : <div className="cert-item">{inner}</div>}
+                  ? <a className="cert-item" title={tip} href={c.url} target="_blank" rel="noopener noreferrer">{inner}</a>
+                  : <div className="cert-item" title={tip}>{inner}</div>}
               </li>
             );
           })}
